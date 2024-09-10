@@ -1,0 +1,151 @@
+{% extends "monblog/base.html" %}
+{% load static  %}
+{% block title %}Accueil{% endblock title %}
+{% block content %}
+<div class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row g-4">
+            <div class="col-lg-7 col-xl-8 mt-0">
+                {% if latest_article %}
+                <div class="position-relative overflow-hidden rounded">
+                    {% if latest_article.image %}
+                    
+                    <img src="{{ latest_article.image.url }}" class="img-fluid rounded img-zoomin w-100" alt="">
+                    {% endif %}
+                    <div class="d-flex justify-content-center px-4 position-absolute flex-wrap" style="bottom: 10px; left: 0;">
+                        <a href="#" class="text-white me-3 link-hover"><i class="fa fa-clock"></i> Publié le {{ latest_article.date_publication|date:"d M Y à H:i" }}</a>
+                        {% comment %} <a href="#" class="text-white me-3 link-hover"><i class="fa fa-eye"></i> 3.5k Views</a> {% endcomment %}
+                        <a href="#" class="text-white me-3 link-hover"><i class="fa fa-comment-dots"></i>{{ latest_article_comment_count }} commentaires</a>
+                        <a href="#" class="text-white link-hover"><i class="fa fa-user"></i> publié par {{ latest_article.auteur.username}} </a>
+                    </div>
+                </div>
+                <div class="border-bottom py-3">
+                    <a href="#" class="display-4 text-dark mb-0 link-hover"> {{ latest_article.titre}} </a>
+                </div>
+                <p class="mt-3 mb-4"> {{ latest_article.contenu }}
+                    {% comment %} <a href="{% url 'articles:detail_article' latest_article.pk %}" class="btn text-primary">Lire la suite</a> {% endcomment %}
+                </p>
+                {% endif %}
+
+                <!-- <div class="bg-light p-4 rounded">
+                    <div class="news-2">
+                        <h3 class="mb-4">Top Story</h3>
+                    </div>
+                    <div class="row g-4 align-items-center">
+                        <div class="col-md-6">
+                            <div class="rounded overflow-hidden">
+                                <img src="{% static 'monblog/img/news-2.jpg' %}" class="img-fluid rounded img-zoomin w-100" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex flex-column">
+                                <a href="#" class="h3">Stoneman Clandestine Ukrainian claims successes against Russian.</a>
+                                <p class="mb-0 fs-5"><i class="fa fa-clock"> 06 minute read</i> </p>
+                                <p class="mb-0 fs-5"><i class="fa fa-eye"> 3.5k Views</i></p>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+
+            {% comment %} categorie {% endcomment %}
+             
+
+            
+            <div class="col-lg-4">
+                <div class="row g-4">
+                    <div class="col-12">
+                        <div class="p-3 rounded border">
+                            
+                            <h4 class="mb-4"> Categories</h4>
+                            <div class="row g-2">
+                                {% if categories %}
+                                {% for categorie in categories %}
+                                <div class="col-12">
+                                    <a href="{% url "articles:articles_par_categorie" categorie.id %}" class="link-hover btn btn-light w-100 rounded text-uppercase text-dark py-3">
+                                        {{ categorie.libelle }}
+                                    </a>
+                                </div>
+                                {% endfor %}
+                                {% else%}
+
+                                <div class="col-12">
+                                    {% comment %} <a href="#" class="link-hover btn btn-light w-100 rounded text-uppercase text-dark py-3"> {% endcomment %}
+                                        auccune categorie disponible
+                                    {% comment %} </a> {% endcomment %}
+                                </div>
+                                {% endif %}
+                               
+                                
+                              
+                                
+                               
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>      
+                       
+                        
+                       
+                    
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Main Post Section End -->
+
+
+<!-- Banner Start -->
+<!-- Banner End -->
+
+
+<!-- Latest News Start -->
+
+<!-- Latest News End -->
+
+
+<!-- Most Populer News Start -->
+{% comment %} <div class="container-fluid populer-news py-5">
+    <div class="container py-5">
+        <div class="tab-class mb-4">
+            <div class="row g-4">
+                <div class="col-lg-8 col-xl-9">
+                   
+                    
+                   
+                    
+                    <div class="mt-5 lifestyle">
+                        <div class="border-bottom mb-4">
+                            <h1 class="mb-4">Life Style</h1>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-lg-6">
+                                <div class="lifestyle-item rounded">
+                                    <img src="img/lifestyle-1.jpg" class="img-fluid w-100 rounded" alt="">
+                                    <div class="lifestyle-content">
+                                       <div class="mt-auto">
+                                            <a href="#" class="h4 text-white link-hover">There are many variations of passages of Lorem Ipsum available,</a>
+                                            <div class="d-flex justify-content-between mt-4">
+                                                <a href="#" class="small text-white link-hover">By Willium Smith</a>
+                                                <small class="text-white d-block"><i class="fas fa-calendar-alt me-1"></i> Dec 9, 2024</small>
+                                            </div>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+<!-- Most Populer News End -->
+
+{% endblock content %}

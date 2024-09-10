@@ -1,0 +1,38 @@
+{% extends 'monblog/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ article.titre }}</h2>
+    <p><strong>Auteur :</strong> {{ article.auteur.username }}</p>
+    <p><strong>Catégorie :</strong> {{ article.Categorie }}</p>
+    <p>{{ article.contenu }}</p>
+    {% if article.image %}
+        <img src="{{ article.image.url }}" class="img-fluid mt-3" alt="{{ article.titre }}">
+    {% endif %}
+
+    <h3 class="mt-5">Commentaires</h3>
+    <div class="mt-3">
+        {% for commentaire in commentaires %}
+            <div class="mb-3">
+                <strong>{{ commentaire.auteur.username }}</strong>
+                <p>{{ commentaire.commentaires }}</p>
+                <small class="text-muted">{{ commentaire.created_at }}</small>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if user.is_authenticated %}
+        <h4>Ajouter un commentaire</h4>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.commentaires.label_tag }}
+                {{ form.commentaires }}
+                {{ form.commentaires.errors }}
+            </div>
+            <button type="submit" class="btn btn-primary">Commenter</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'auth:login' %}">Connectez-vous</a> pour ajouter un commentaire.</p>
+    {% endif %}
+</div>
+{% endblock %}

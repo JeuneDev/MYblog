@@ -1,0 +1,13 @@
+<!-- templates/articles/edit_article.html -->
+{% extends 'monblog/base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Modifier l'article</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Sauvegarder</button>
+        <a href="{% url 'articles:user_articles' %}" class="btn btn-secondary">Annuler</a>
+    </form>
+</div>
+{% endblock %}

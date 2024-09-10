@@ -1,0 +1,13 @@
+{% extends 'monblog/base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Liste des catégories</h2>
+    <ul>
+        {% for categorie in categories %}
+            <li>
+                <a href="{% url 'articles:articles_par_categorie' categorie.pk %}">{{ categorie.libelle }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

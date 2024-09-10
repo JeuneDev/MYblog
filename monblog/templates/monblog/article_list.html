@@ -1,0 +1,29 @@
+{% extends 'monblog/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Liste des Articles</h2>
+    <div class="row">
+        {% for article in articles %}
+            <div class="col-md-4 mb-4">
+                <div class="card h-100">
+                    {% if article.image %}
+                        <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.titre }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.titre }}</h5>
+                        <p class="card-text">{{ article.resume }}</p>
+                        <a href="{% url 'articles:detail_article' article.id %}" class="btn btn-primary">Lire l'article</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="mt-4">
+        {% if user.is_authenticated %}
+            <a href="{% url 'articles:creer_article' %}" class="btn btn-success">Créer un nouvel article</a>
+        {% else %}
+            <p><a href="{% url 'auth:login' %}">Connectez-vous</a> pour créer un article.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

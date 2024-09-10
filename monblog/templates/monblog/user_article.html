@@ -1,0 +1,27 @@
+<!-- templates/articles/user_articles.html -->
+{% extends 'monblog/base.html' %}
+{% block content %}
+<div class="container">
+    <h2>Mes articles</h2>
+    {% if articles %}
+        {% for article in articles %}
+            <div class="card mb-4">
+                {% if article.image %}
+                    <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.titre }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.titre }}</h5>
+                    <p class="card-text">{{ article.contenu|slice:":150" }}...</p>
+                    <p class="card-text">Publié le {{ article.date_publication|date:"d M Y à H:i" }}</p>
+                    <a href="{% url 'articles:detail_article' article.pk %}" class="btn btn-primary">Voir l'article</a>
+                    <!-- Boutons Modifier et Supprimer uniquement pour l'auteur -->
+                    <a href="{% url 'articles:edit_article' article.pk %}" class="btn btn-warning">Modifier</a>
+                    <a href="{% url 'articles:delete_article' article.pk %}" class="btn btn-danger">Supprimer</a>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>Vous n'avez aucun article pour le moment.</p>
+    {% endif %}
+</div>
+{% endblock %}

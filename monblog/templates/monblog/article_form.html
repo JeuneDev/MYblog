@@ -1,0 +1,43 @@
+{% extends 'monblog/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Créer un nouvel article</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <div class="mb-3">
+            {{ form.titre.label_tag }}
+            {{ form.titre }}
+            {{ form.titre.errors }}
+        </div>
+        <div class="mb-3">
+            {{ form.resume.label_tag }}
+            {{ form.resume }}
+            {{ form.resume.errors }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.contenu.label_tag }}
+            {{ form.contenu }}
+            {{ form.contenu.errors }}
+        </div>
+        
+       
+        
+        <div class="mb-3">
+            {{ form.Categorie.label_tag }}
+            {{ form.Categorie }}
+            {{ form.Categorie.errors }}
+        </div>
+        
+        <div class="mb-3">
+            {{ form.image.label_tag }}
+            {{ form.image }}
+            {{ form.image.errors }}
+        </div>
+        
+        <button type="submit" class="btn btn-success">Publier</button>
+    </form>
+</div>
+{% endblock %}
